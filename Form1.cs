@@ -116,6 +116,10 @@ namespace missionControl1
                 lat = Convert.ToDouble(get_geo(dat_delim[lat_pos])) * equ;
                 lon = Convert.ToDouble(get_geo(dat_delim[lat_pos + 2])) * mer;
             }
+            double temperature = double.Parse(dat_delim[temp_index], System.Globalization.CultureInfo.InvariantCulture) * 1.8000 + 32.00;
+            double accel_x = double.Parse(dat_delim[acc_index], System.Globalization.CultureInfo.InvariantCulture) * 3.2808;
+            double accel_y = double.Parse(dat_delim[acc_index + 1], System.Globalization.CultureInfo.InvariantCulture) * 3.2808;
+            double accel_z = double.Parse(dat_delim[acc_index + 2], System.Globalization.CultureInfo.InvariantCulture) * 3.2808;
             // This will update all GUI elements whenever new data is received
             try
             {
@@ -126,35 +130,35 @@ namespace missionControl1
                     {
                         tb_lat_p.Text = lat.ToString();
                         tb_lon_p.Text = lon.ToString();
-                        tb_acc_x_p.Text = dat_delim[acc_index];
-                        tb_acc_y_p.Text = dat_delim[acc_index + 1];
-                        tb_acc_z_p.Text = dat_delim[acc_index + 2];
+                        tb_acc_x_p.Text = accel_x.ToString("0.####");
+                        tb_acc_y_p.Text = accel_y.ToString("0.####");
+                        tb_acc_z_p.Text = accel_z.ToString("0.####");
                         tb_gyro_x_p.Text = dat_delim[gyro_index];
                         tb_gyro_y_p.Text = dat_delim[gyro_index + 1];
                         tb_gyro_z_p.Text = dat_delim[gyro_index + 2];
                         tb_mag_x_p.Text = dat_delim[mag_index];
                         tb_mag_y_p.Text = dat_delim[mag_index + 1];
                         tb_mag_z_p.Text = dat_delim[mag_index + 2];
-                        tb_temp_p.Text = dat_delim[temp_index];
+                        tb_temp_p.Text = temperature.ToString("0.####");
                         tb_pres_p.Text = dat_delim[pres_index];
                         GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.blue_small);
                         markers.Markers.Add(marker);
                     }
                     else if (dat_delim[0] == payload_section)
                     {
-                        tb_lat_b.Text = lat.ToString();
-                        tb_lon_b.Text = lon.ToString();
-                        tb_acc_x_b.Text = dat_delim[acc_index];
-                        tb_acc_y_b.Text = dat_delim[acc_index + 1];
-                        tb_acc_z_b.Text = dat_delim[acc_index + 2];
-                        tb_gyro_x_b.Text = dat_delim[gyro_index];
-                        tb_gyro_y_b.Text = dat_delim[gyro_index + 1];
-                        tb_gyro_z_b.Text = dat_delim[gyro_index + 2];
-                        tb_mag_x_b.Text = dat_delim[mag_index];
-                        tb_mag_y_b.Text = dat_delim[mag_index + 1];
-                        tb_mag_z_b.Text = dat_delim[mag_index + 2];
-                        tb_temp_b.Text = dat_delim[temp_index];
-                        tb_pres_b.Text = dat_delim[pres_index];
+                        tb_lat_p.Text = lat.ToString();
+                        tb_lon_p.Text = lon.ToString();
+                        tb_acc_x_p.Text = accel_x.ToString("0.####");
+                        tb_acc_y_p.Text = accel_y.ToString("0.####");
+                        tb_acc_z_p.Text = accel_z.ToString("0.####");
+                        tb_gyro_x_p.Text = dat_delim[gyro_index];
+                        tb_gyro_y_p.Text = dat_delim[gyro_index + 1];
+                        tb_gyro_z_p.Text = dat_delim[gyro_index + 2];
+                        tb_mag_x_p.Text = dat_delim[mag_index];
+                        tb_mag_y_p.Text = dat_delim[mag_index + 1];
+                        tb_mag_z_p.Text = dat_delim[mag_index + 2];
+                        tb_temp_p.Text = temperature.ToString("0.####");
+                        tb_pres_p.Text = dat_delim[pres_index];
                         GMapMarker marker = new GMarkerGoogle(new PointLatLng(lat, lon), GMarkerGoogleType.red_small);
                         markers.Markers.Add(marker);
                     }
